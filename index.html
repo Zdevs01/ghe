@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martin Paul Ella Mvondo — Ingénieur & Directeur Général</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --violet: #6B21A8;
+    --violet-deep: #3B0764;
+    --violet-mid: #7C3AED;
+    --violet-light: #A855F7;
+    --violet-pale: #EDE9FE;
+    --violet-glow: rgba(107,33,168,0.18);
+    --white: #FFFFFF;
+    --off-white: #F8F5FF;
+    --text-dark: #1A0533;
+    --text-mid: #4B2880;
+    --text-light: #9B8EC4;
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--violet-pale); }
+  ::-webkit-scrollbar-thumb { background: var(--violet-mid); border-radius: 3px; }
+
+  .cursor { width: 12px; height: 12px; background: var(--violet-light); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; mix-blend-mode: multiply; }
+  .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--violet-mid); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.12s ease; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; backdrop-filter: blur(20px); background: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(107,33,168,0.08); transition: all 0.4s ease; }
+  nav.scrolled { padding: 0.8rem 4rem; background: rgba(255,255,255,0.97); box-shadow: 0 4px 30px rgba(107,33,168,0.12); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--violet-deep); letter-spacing: 1px; text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; color: var(--text-mid); text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; position: relative; padding-bottom: 4px; transition: color 0.3s; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--violet-mid); transition: width 0.3s ease; }
+  .nav-links a:hover { color: var(--violet); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { background: var(--violet-mid); color: var(--white) !important; padding: 0.55rem 1.5rem !important; border-radius: 50px; transition: background 0.3s, transform 0.2s !important; }
+  .nav-cta:hover { background: var(--violet-deep) !important; transform: translateY(-2px); }
+  .nav-cta::after { display: none !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 26px; height: 2px; background: var(--violet); transition: all 0.3s; }
+
+  #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--violet-deep) 0%, #4C1D95 40%, #6D28D9 70%, var(--violet-mid) 100%); padding: 100px 0 60px; }
+  .hero-noise { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; }
+  .hero-orb-1 { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(168,85,247,0.25) 0%, transparent 70%); top: -100px; right: -100px; border-radius: 50%; animation: orbFloat 8s ease-in-out infinite; }
+  .hero-orb-2 { position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); bottom: -50px; left: 10%; animation: orbFloat 10s ease-in-out infinite reverse; }
+  @keyframes orbFloat { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+  .hero-grid-line { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-container { max-width: 1300px; margin: 0 auto; padding: 0 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 2; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 6px 18px; font-size: 0.75rem; color: rgba(255,255,255,0.85); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem; animation: fadeInUp 0.8s ease both; }
+  .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 700; line-height: 1.1; color: var(--white); margin-bottom: 0.5rem; animation: fadeInUp 0.8s 0.1s ease both; }
+  .hero-name .gold { color: var(--gold-light); }
+  .hero-title { font-size: 1rem; font-weight: 400; color: rgba(255,255,255,0.7); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; animation: fadeInUp 0.8s 0.2s ease both; }
+  .hero-desc { font-size: 1.05rem; line-height: 1.85; color: rgba(255,255,255,0.8); max-width: 520px; margin-bottom: 2.5rem; animation: fadeInUp 0.8s 0.3s ease both; }
+  .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 3rem; animation: fadeInUp 0.8s 0.4s ease both; }
+  .stat-item { text-align: left; }
+  .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--gold-light); line-height: 1; display: block; }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); letter-spacing: 1.5px; text-transform: uppercase; }
+  .hero-actions { display: flex; gap: 1rem; animation: fadeInUp 0.8s 0.5s ease both; }
+  .btn-primary-hero { background: var(--gold); color: var(--violet-deep); padding: 1rem 2.2rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none; letter-spacing: 0.5px; transition: all 0.3s ease; box-shadow: 0 8px 30px rgba(212,175,55,0.4); }
+  .btn-primary-hero:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(212,175,55,0.5); }
+  .btn-outline-hero { background: transparent; color: var(--white); padding: 1rem 2.2rem; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.4); font-weight: 500; font-size: 0.9rem; text-decoration: none; transition: all 0.3s ease; }
+  .btn-outline-hero:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+  .hero-right { display: flex; justify-content: center; align-items: center; animation: fadeInRight 1s 0.3s ease both; }
+  .hero-photo-wrap { position: relative; width: 400px; height: 500px; }
+  .hero-photo-frame { position: absolute; width: 340px; height: 440px; border-radius: 200px 200px 0 200px; background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); top: 0; left: 30px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-initials { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: -2px; }
+  .hero-card-float { position: absolute; background: rgba(255,255,255,0.12); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 1rem 1.4rem; animation: float 4s ease-in-out infinite; }
+  .hero-card-float.card-1 { bottom: 40px; left: -20px; animation-delay: 0s; }
+  .hero-card-float.card-2 { top: 60px; right: -10px; animation-delay: 1.5s; }
+  .card-float-icon { font-size: 1.5rem; margin-bottom: 4px; }
+  .card-float-val { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--white); line-height: 1; }
+  .card-float-text { font-size: 0.7rem; color: rgba(255,255,255,0.7); letter-spacing: 1px; text-transform: uppercase; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .hero-deco-ring { position: absolute; width: 100px; height: 100px; border: 2px solid rgba(212,175,55,0.3); border-radius: 50%; bottom: 20px; right: 0; animation: spin 12s linear infinite; }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInRight { from{opacity:0;transform:translateX(50px)} to{opacity:1;transform:translateX(0)} }
+
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+  .section-label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--violet-mid); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.5rem); font-weight: 700; line-height: 1.2; color: var(--text-dark); margin-bottom: 1.2rem; }
+  .section-desc { font-size: 1rem; color: var(--text-light); line-height: 1.8; max-width: 560px; }
+  .section-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--violet-mid), var(--gold)); border-radius: 2px; margin-bottom: 1.5rem; }
+
+  #about { background: var(--off-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-visual { position: relative; }
+  .about-photo-bg { width: 100%; height: 480px; background: linear-gradient(135deg, var(--violet-pale), var(--violet-mid)); border-radius: 20px 20px 100px 20px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .about-initials-bg { font-family: 'Cormorant Garamond', serif; font-size: 8rem; font-weight: 700; color: rgba(107,33,168,0.2); letter-spacing: -4px; position: relative; z-index: 1; }
+  .about-deco-box { position: absolute; width: 120px; height: 120px; border: 2px solid var(--gold); border-radius: 20px; bottom: -20px; right: -20px; }
+  .about-exp-badge { position: absolute; top: -20px; left: -20px; background: var(--violet-deep); color: var(--white); border-radius: 16px; padding: 1.2rem 1.5rem; text-align: center; box-shadow: 0 10px 30px rgba(59,7,100,0.3); }
+  .about-exp-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: var(--gold-light); display: block; line-height: 1; }
+  .about-exp-label { font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  .about-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  .info-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-light); margin-bottom: 3px; }
+  .info-value { font-size: 0.92rem; font-weight: 600; color: var(--text-dark); }
+  .info-value a { color: var(--violet-mid); text-decoration: none; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
+  .about-tag { background: var(--white); border: 1px solid rgba(107,33,168,0.2); color: var(--violet-mid); padding: 6px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 500; transition: all 0.3s; }
+  .about-tag:hover { background: var(--violet-mid); color: var(--white); transform: translateY(-2px); }
+
+  #competences { background: var(--white); }
+  .competences-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+  .comp-card { background: var(--off-white); border: 1px solid rgba(107,33,168,0.08); border-radius: 20px; padding: 2rem; transition: all 0.4s ease; position: relative; overflow: hidden; }
+  .comp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--violet-mid), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+  .comp-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(107,33,168,0.15); border-color: rgba(107,33,168,0.2); }
+  .comp-card:hover::before { transform: scaleX(1); }
+  .comp-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--violet-pale), var(--violet-mid)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); margin-bottom: 1.2rem; }
+  .comp-title { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; }
+  .comp-text { font-size: 0.85rem; line-height: 1.7; color: var(--text-light); }
+
+  #services { background: linear-gradient(135deg, var(--violet-deep), #4C1D95); position: relative; overflow: hidden; }
+  #services::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; }
+  #services .section-label { color: var(--gold); }
+  #services .section-title { color: var(--white); }
+  #services .section-desc { color: rgba(255,255,255,0.7); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative; z-index: 1; }
+  .service-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 2rem; transition: all 0.4s ease; backdrop-filter: blur(10px); cursor: pointer; }
+  .service-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-8px); border-color: rgba(212,175,55,0.4); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .service-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 1rem; display: block; }
+  .service-icon-wrap { width: 48px; height: 48px; border: 1.5px solid rgba(212,175,55,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--gold); margin-bottom: 1.2rem; }
+  .service-name { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.8rem; }
+  .service-desc { font-size: 0.8rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 1.2rem; }
+  .stag { font-size: 0.65rem; padding: 3px 8px; background: rgba(255,255,255,0.08); border-radius: 50px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
+
+  #experience { background: var(--off-white); }
+  .experience-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--violet-mid), transparent); margin-left: 20px; }
+  .tl-item { padding-left: 60px; position: relative; margin-bottom: 2.5rem; }
+  .tl-dot { position: absolute; left: 12px; top: 6px; width: 18px; height: 18px; background: var(--white); border: 3px solid var(--violet-mid); border-radius: 50%; transition: all 0.3s; z-index: 1; }
+  .tl-item:hover .tl-dot { background: var(--violet-mid); transform: scale(1.3); }
+  .tl-period { font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--violet-light); margin-bottom: 6px; }
+  .tl-role { font-size: 1.05rem; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .tl-company { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 8px; font-weight: 500; }
+  .tl-desc { font-size: 0.83rem; line-height: 1.7; color: var(--text-light); }
+
+  #projets { background: var(--white); }
+  .projets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 4rem; }
+  .projet-card { border-radius: 24px; overflow: hidden; position: relative; transition: transform 0.4s ease; cursor: pointer; }
+  .projet-card:hover { transform: translateY(-8px); }
+  .projet-visual { height: 220px; display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; overflow: hidden; }
+  .projet-card:nth-child(1) .projet-visual { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .projet-card:nth-child(2) .projet-visual { background: linear-gradient(135deg, #0f3460, #533483); }
+  .projet-card:nth-child(3) .projet-visual { background: linear-gradient(135deg, #1b4332, #2d6a4f); }
+  .projet-card:nth-child(4) .projet-visual { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+  .projet-visual-inner { text-align: center; z-index: 1; }
+  .projet-visual .icon-big { font-size: 3.5rem; opacity: 0.7; }
+  .projet-deco-circle { position: absolute; width: 200px; height: 200px; border: 60px solid rgba(255,255,255,0.04); border-radius: 50%; top: -50px; right: -50px; }
+  .projet-body { padding: 1.8rem; background: var(--off-white); border: 1px solid rgba(107,33,168,0.08); border-top: none; border-radius: 0 0 24px 24px; }
+  .projet-role-badge { display: inline-block; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; background: var(--violet-pale); color: var(--violet-mid); padding: 4px 12px; border-radius: 50px; margin-bottom: 0.8rem; font-weight: 600; }
+  .projet-name { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.7rem; line-height: 1.4; }
+  .projet-desc { font-size: 0.82rem; line-height: 1.7; color: var(--text-light); }
+  .projet-client { display: flex; align-items: center; gap: 8px; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(107,33,168,0.08); font-size: 0.78rem; color: var(--text-mid); font-weight: 500; }
+  .projet-client i { color: var(--violet-light); }
+
+  #skills { background: var(--off-white); }
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+  .skills-visual { background: linear-gradient(135deg, var(--violet-deep), var(--violet-mid)); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; }
+  .skills-visual::before { content: 'EXPERT'; position: absolute; right: -20px; top: 40px; font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 900; color: rgba(255,255,255,0.05); writing-mode: vertical-rl; }
+  .skill-bar-item { margin-bottom: 1.8rem; }
+  .skill-bar-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .skill-bar-name { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+  .skill-bar-pct { font-size: 0.78rem; color: var(--gold); font-weight: 600; }
+  .skill-bar-track { height: 5px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); width: 0; transition: width 1.5s cubic-bezier(0.4,0,0.2,1) 0.3s; }
+  .skills-list { list-style: none; }
+  .skills-list-item { display: flex; align-items: flex-start; gap: 12px; padding: 0.9rem 0; border-bottom: 1px solid rgba(107,33,168,0.08); transition: transform 0.3s; }
+  .skills-list-item:hover { transform: translateX(6px); }
+  .sli-icon { width: 36px; height: 36px; flex-shrink: 0; background: var(--violet-pale); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--violet-mid); }
+  .sli-name { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
+  .sli-desc { font-size: 0.78rem; color: var(--text-light); line-height: 1.5; }
+
+  #contact { background: linear-gradient(135deg, var(--violet-deep), #4C1D95); position: relative; }
+  #contact .section-label { color: var(--gold); }
+  #contact .section-title { color: var(--white); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; position: relative; z-index: 1; }
+  .contact-info-list { list-style: none; margin-top: 2rem; }
+  .contact-info-item { display: flex; align-items: flex-start; gap: 16px; padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .contact-icon-wrap { width: 44px; height: 44px; flex-shrink: 0; border: 1px solid rgba(212,175,55,0.4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1rem; }
+  .contact-info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+  .contact-info-value { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+  .contact-info-value a { color: var(--white); text-decoration: none; }
+  .contact-form { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(10px); }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+  .form-group input, .form-group textarea { width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 0.85rem 1rem; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; transition: border-color 0.3s; resize: none; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .btn-send { width: 100%; background: var(--gold); color: var(--violet-deep); font-weight: 700; font-size: 0.9rem; padding: 1rem; border: none; border-radius: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s; margin-top: 0.5rem; }
+  .btn-send:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,175,55,0.4); background: var(--gold-light); }
+  .social-links { display: flex; gap: 12px; margin-top: 2rem; }
+  .social-link { width: 44px; height: 44px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); font-size: 1rem; text-decoration: none; transition: all 0.3s; }
+  .social-link:hover { background: var(--gold); color: var(--violet-deep); border-color: var(--gold); transform: translateY(-3px); }
+
+  /* ── ERREURS FORMULAIRE ── */
+  .f-error { display: none; font-size: 0.72rem; color: #f87171; margin-top: 5px; }
+  .f-error.show { display: block; }
+  .form-group input.invalid, .form-group textarea.invalid { border-color: #f87171 !important; }
+
+  footer { background: var(--violet-deep); padding: 2rem 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--gold); }
+  .footer-text { font-size: 0.78rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+  .footer-slogan { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-style: italic; margin-bottom: 0.5rem; }
+
+  /* ── BACK TO TOP (bas droite) ── */
+  #back-top { position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px; background: var(--violet-mid); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1rem; text-decoration: none; opacity: 0; transition: all 0.3s; box-shadow: 0 8px 20px rgba(107,33,168,0.4); z-index: 500; }
+  #back-top.visible { opacity: 1; }
+  #back-top:hover { transform: translateY(-4px); background: var(--violet-deep); }
+
+  /* ── WHATSAPP FLOTTANT (bas gauche) ── */
+  #whatsapp-btn { position: fixed; bottom: 30px; left: 30px; width: 48px; height: 48px; background: #25D366; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1.4rem; text-decoration: none; box-shadow: 0 8px 20px rgba(37,211,102,0.45); z-index: 500; transition: all 0.3s; animation: waPulse 2.5s ease-in-out infinite; }
+  #whatsapp-btn:hover { transform: translateY(-4px) scale(1.08); box-shadow: 0 14px 30px rgba(37,211,102,0.6); animation: none; }
+  @keyframes waPulse { 0%,100% { box-shadow: 0 8px 20px rgba(37,211,102,0.45); } 50% { box-shadow: 0 8px 35px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); } }
+
+  .mobile-menu { position: fixed; inset: 0; z-index: 999; background: var(--violet-deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; transform: translateX(-100%); transition: transform 0.4s ease; }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a { font-size: 1.5rem; color: var(--white); text-decoration: none; font-family: 'Cormorant Garamond', serif; }
+  .close-menu { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 1024px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; }
+    .hero-right { display: none; }
+    .hero-stats { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .experience-layout { grid-template-columns: 1fr; }
+    .projets-grid { grid-template-columns: 1fr; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .contact-layout { grid-template-columns: 1fr; }
+    .competences-grid { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .container { padding: 0 1.5rem; }
+  }
+  @media (max-width: 640px) {
+    section { padding: 60px 0; }
+    .competences-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .projets-grid { grid-template-columns: 1fr; }
+    .about-info-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  .typed::after { content: '|'; animation: blink 0.7s infinite; color: var(--gold); }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+  <a href="#hero">Accueil</a>
+  <a href="#about">À Propos</a>
+  <a href="#competences">Compétences</a>
+  <a href="#services">Services</a>
+  <a href="#experience">Expérience</a>
+  <a href="#projets">Projets</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">GHE<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#hero">Accueil</a></li>
+    <li><a href="#about">À Propos</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-line"></div>
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <div class="hero-container">
+    <div class="hero-left">
+      <div class="hero-badge">Disponible pour collaboration</div>
+      <h3 class="hero-title">Directeur Général & Ingénieur Naval</h3>
+      <h1 class="hero-name">Martin Paul<br><span class="gold">Ella Mvondo</span></h1>
+      <p class="hero-desc">Expert en ingénierie électrique, développement industriel et conseil stratégique avec plus de 20 ans d'expérience au Cameroun et en Afrique centrale.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">20+</span>
+          <span class="stat-label">Années d'expérience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">4+</span>
+          <span class="stat-label">Projets majeurs</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3+</span>
+          <span class="stat-label">Entreprises dirigées</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary-hero"><i class="fas fa-envelope" style="margin-right:8px"></i>Me Contacter</a>
+        <a href="#projets" class="btn-outline-hero">Voir les Projets</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <img src="img/photo.jpeg" alt="Martin Paul Ella Mvondo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        </div>
+        <div class="hero-card-float card-1">
+          <div class="card-float-icon">⚡</div>
+          <div class="card-float-val">PAD</div>
+          <div class="card-float-text">Port Autonome Douala</div>
+        </div>
+        <div class="hero-card-float card-2">
+          <div class="card-float-icon">🏗️</div>
+          <div class="card-float-val">GHE</div>
+          <div class="card-float-text">Group Horizon Eng.</div>
+        </div>
+        <div class="hero-deco-ring"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal-left">
+        <div class="about-photo-bg">
+          <img src="img/photo.jpeg" alt="Martin Paul Ella Mvondo" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="about-deco-box"></div>
+        <div class="about-exp-badge">
+          <span class="about-exp-num">20+</span>
+          <span class="about-exp-label">Ans d'expertise</span>
+        </div>
+      </div>
+      <div class="about-right reveal-right">
+        <span class="section-label">À Propos</span>
+        <div class="section-line"></div>
+        <h2 class="section-title">Ingénieur, Entrepreneur & Facilitateur d'affaires</h2>
+        <p style="font-size:0.95rem; line-height:1.85; color:var(--text-light); margin-bottom:1.5rem;">
+          Professionnel aguerri avec une expertise pointue en ingénierie électrique navale, industrielle et tertiaire. Fort d'une carrière construite au sein des plus grandes institutions camerounaises, Martin Paul Ella Mvondo allie excellence technique, vision stratégique et capacité de mise en réseau à haute valeur ajoutée.
+        </p>
+        <div class="about-info-grid">
+          <div class="info-item">
+            <div class="info-label">Nom complet</div>
+            <div class="info-value">Ella Mvondo Martin Paul</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Âge</div>
+            <div class="info-value">54 ans</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Ville</div>
+            <div class="info-value">Douala, Cameroun</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Téléphone</div>
+            <div class="info-value"><a href="tel:+237693502389">(+237) 693 502 389</a></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Email principal</div>
+            <div class="info-value"><a href="mailto:martinmvondo@gmail.com">martinmvondo@gmail.com</a></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Statut</div>
+            <div class="info-value" style="color:var(--violet-mid)">✓ Disponible</div>
+          </div>
+        </div>
+        <div class="about-tags">
+          <span class="about-tag">Ingénierie Navale</span>
+          <span class="about-tag">Énergie Solaire</span>
+          <span class="about-tag">Télécoms</span>
+          <span class="about-tag">BIM & SIG</span>
+          <span class="about-tag">Direction Générale</span>
+          <span class="about-tag">Facilitation d'affaires</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:1rem;" class="reveal">
+      <span class="section-label">Expertise</span>
+      <div class="section-line" style="margin:0 auto 1rem"></div>
+      <h2 class="section-title">Compétences Clés</h2>
+      <p class="section-desc" style="margin:0 auto">Des compétences techniques et stratégiques acquises sur plus de deux décennies au cœur de l'industrie camerounaise.</p>
+    </div>
+    <div class="competences-grid">
+      <div class="comp-card reveal reveal-delay-1">
+        <div class="comp-icon"><i class="fas fa-bolt"></i></div>
+        <div class="comp-title">Ingénierie Électrique</div>
+        <div class="comp-text">Conception, réalisation et maintenance de systèmes électriques dans les secteurs tertiaire, industriel et naval. Lecture de plans et installation de tableaux.</div>
+      </div>
+      <div class="comp-card reveal reveal-delay-2">
+        <div class="comp-icon"><i class="fas fa-anchor"></i></div>
+        <div class="comp-title">Systèmes Navals</div>
+        <div class="comp-text">Installation et réparation de systèmes électriques navals. Expertise unique acquise au Chantier Naval et Industriel du Cameroun (2004–2018).</div>
+      </div>
+      <div class="comp-card reveal reveal-delay-3">
+        <div class="comp-icon"><i class="fas fa-handshake"></i></div>
+        <div class="comp-title">Facilitation d'Affaires</div>
+        <div class="comp-text">Mise en relation stratégique, négociation de contrats et accompagnement de partenariats industriels à haute valeur. Facilitateur PAD & CAMRAIL.</div>
+      </div>
+      <div class="comp-card reveal reveal-delay-1">
+        <div class="comp-icon"><i class="fas fa-solar-panel"></i></div>
+        <div class="comp-title">Énergie Solaire</div>
+        <div class="comp-text">Étude, conception et maintenance de systèmes photovoltaïques et thermiques. Solutions durables pour particuliers et entreprises.</div>
+      </div>
+      <div class="comp-card reveal reveal-delay-2">
+        <div class="comp-icon"><i class="fas fa-chess-king"></i></div>
+        <div class="comp-title">Conseil Stratégique</div>
+        <div class="comp-text">Accompagnement de dirigeants et d'entreprises dans leur développement commercial. Vision à long terme et gestion de projets complexes.</div>
+      </div>
+      <div class="comp-card reveal reveal-delay-3">
+        <div class="comp-icon"><i class="fas fa-fire-extinguisher"></i></div>
+        <div class="comp-title">Sécurité & Incendie</div>
+        <div class="comp-text">Étude, conception et supervision de systèmes d'extinction automatique d'incendie. Mise aux normes d'installations industrielles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div>
+        <span class="section-label">Offres</span>
+        <div class="section-line"></div>
+        <h2 class="section-title" style="color:var(--white)">Mes Services</h2>
+      </div>
+      <p class="section-desc" style="color:rgba(255,255,255,0.6); max-width:400px; text-align:right;">
+        Une gamme complète de prestations en ingénierie, énergie, télécoms et solutions innovantes.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">01</span>
+        <div class="service-icon-wrap"><i class="fas fa-bolt"></i></div>
+        <div class="service-name">Électricité Générale</div>
+        <div class="service-desc">Ingénierie électrique complète pour tous secteurs : étude, conception, réalisation et maintenance.</div>
+        <div class="service-tags"><span class="stag">Tertiaire</span><span class="stag">Industriel</span><span class="stag">Naval</span></div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">02</span>
+        <div class="service-icon-wrap"><i class="fas fa-sun"></i></div>
+        <div class="service-name">Énergie Solaire</div>
+        <div class="service-desc">Systèmes photovoltaïques et thermiques, du dimensionnement à la mise en service.</div>
+        <div class="service-tags"><span class="stag">Photovoltaïque</span><span class="stag">Thermique</span></div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-num">03</span>
+        <div class="service-icon-wrap"><i class="fas fa-network-wired"></i></div>
+        <div class="service-name">Réseaux & Télécoms</div>
+        <div class="service-desc">Infrastructure fibre optique, systèmes de sécurité électronique, extinction automatique d'incendie.</div>
+        <div class="service-tags"><span class="stag">Fibre Optique</span><span class="stag">CCTV</span><span class="stag">Incendie</span></div>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <span class="service-num">04</span>
+        <div class="service-icon-wrap"><i class="fas fa-map-marked-alt"></i></div>
+        <div class="service-name">Solutions Intelligentes</div>
+        <div class="service-desc">Géomatique, Géomarketing, SIG et BIM — des outils interactifs pour une gestion intelligente.</div>
+        <div class="service-tags"><span class="stag">SIG</span><span class="stag">BIM</span><span class="stag">Géomarketing</span></div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">05</span>
+        <div class="service-icon-wrap"><i class="fas fa-industry"></i></div>
+        <div class="service-name">Travaux Métallurgiques</div>
+        <div class="service-desc">Chaudronnerie, tuyauterie et soudure industrielle. Expertise technique de haut niveau.</div>
+        <div class="service-tags"><span class="stag">Chaudronnerie</span><span class="stag">Soudure</span></div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">06</span>
+        <div class="service-icon-wrap"><i class="fas fa-briefcase"></i></div>
+        <div class="service-name">Conseil & Facilitation</div>
+        <div class="service-desc">Mise en relation d'affaires, accompagnement technique et négociation de contrats industriels.</div>
+        <div class="service-tags"><span class="stag">Stratégie</span><span class="stag">Partenariats</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:2rem;" class="reveal">
+      <span class="section-label">Parcours</span>
+      <div class="section-line" style="margin:0 auto 1rem"></div>
+      <h2 class="section-title">Expérience Professionnelle</h2>
+    </div>
+    <div class="experience-layout">
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:2rem; color:var(--text-dark);" class="reveal">Trajectoire de carrière</h3>
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-period">2004 – 2018 · 14 ans</div>
+            <div class="tl-role">Électromécanicien Naval</div>
+            <div class="tl-company"><i class="fas fa-anchor" style="font-size:0.75rem; margin-right:5px; color:var(--violet-light)"></i>Chantier Naval et Industriel du Cameroun</div>
+            <div class="tl-desc">Spécialiste en réparation et construction de systèmes électriques navals. Expertise en mécanique, électricité, électronique, automatisation et gestion de projets industriels.</div>
+          </div>
+          <div class="tl-item reveal reveal-delay-1">
+            <div class="tl-dot"></div>
+            <div class="tl-period">2010 – 2014 · 4 ans</div>
+            <div class="tl-role">Consultant Senior</div>
+            <div class="tl-company"><i class="fas fa-building" style="font-size:0.75rem; margin-right:5px; color:var(--violet-light)"></i>Group Horizon Engineering Sarl</div>
+            <div class="tl-desc">Accompagnement technique d'entreprises, gestion de projets d'envergure, formation et montée en compétences des équipes terrain.</div>
+          </div>
+          <div class="tl-item reveal reveal-delay-2">
+            <div class="tl-dot"></div>
+            <div class="tl-period">2018 – 2021 · 3 ans</div>
+            <div class="tl-role">Promoteur & Directeur Général</div>
+            <div class="tl-company"><i class="fas fa-star" style="font-size:0.75rem; margin-right:5px; color:var(--violet-light)"></i>EIRPI ENGINEERING SARL</div>
+            <div class="tl-desc">Création et direction d'une entreprise d'ingénierie. Management opérationnel, développement commercial et suivi de projets techniques.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:2rem; color:var(--text-dark);" class="reveal">Fonctions actuelles</h3>
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-dot" style="border-color:var(--gold); background:var(--gold)"></div>
+            <div class="tl-period" style="color:var(--gold)">2021 – Aujourd'hui · En poste</div>
+            <div class="tl-role">Directeur Général</div>
+            <div class="tl-company"><i class="fas fa-crown" style="font-size:0.75rem; margin-right:5px; color:var(--gold)"></i>Group Horizon Engineering Sarl</div>
+            <div class="tl-desc">Management stratégique de l'entreprise, développement des affaires, négociation de contrats industriels majeurs et supervision des opérations techniques.</div>
+          </div>
+          <div class="tl-item reveal reveal-delay-1">
+            <div class="tl-dot" style="border-color:var(--gold); background:var(--gold)"></div>
+            <div class="tl-period" style="color:var(--gold)">2023 – Aujourd'hui · En poste</div>
+            <div class="tl-role">Facilitateur d'Affaires</div>
+            <div class="tl-company"><i class="fas fa-link" style="font-size:0.75rem; margin-right:5px; color:var(--gold)"></i>SITINFRA CAMEROUN</div>
+            <div class="tl-desc">Mise en relation entre SITINFRA et le Port Autonome de Douala. Conseil stratégique et suivi de partenariats à forte valeur ajoutée.</div>
+          </div>
+          <div class="tl-item reveal reveal-delay-2">
+            <div class="tl-dot" style="border-color:var(--gold); background:var(--gold)"></div>
+            <div class="tl-period" style="color:var(--gold)">2026 · En poste</div>
+            <div class="tl-role">Facilitateur d'Affaires</div>
+            <div class="tl-company"><i class="fas fa-globe-africa" style="font-size:0.75rem; margin-right:5px; color:var(--gold)"></i>TONA EXIM CAMEROUN</div>
+            <div class="tl-desc">Développement de partenariats commerciaux, mise en relation stratégique et conseil pour l'expansion des activités.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:2rem;" class="reveal">
+      <span class="section-label">Réalisations</span>
+      <div class="section-line" style="margin:0 auto 1rem"></div>
+      <h2 class="section-title">Projets Marquants</h2>
+      <p class="section-desc" style="margin:0 auto">Des projets à fort impact dans les secteurs industriels et portuaires du Cameroun.</p>
+    </div>
+    <div class="projets-grid">
+      <div class="projet-card reveal reveal-delay-1">
+        <div class="projet-visual"><div class="projet-deco-circle"></div><div class="projet-visual-inner"><div class="icon-big">🔥</div></div></div>
+        <div class="projet-body">
+          <span class="projet-role-badge">Supervision</span>
+          <div class="projet-name">Système d'extinction automatique d'incendie</div>
+          <div class="projet-desc">Installation d'un système d'extinction automatique d'incendie au Port Autonome de Douala. Étude, conception, coordination des équipes et contrôle de conformité.</div>
+          <div class="projet-client"><i class="fas fa-anchor"></i> Port Autonome de Douala</div>
+        </div>
+      </div>
+      <div class="projet-card reveal reveal-delay-2">
+        <div class="projet-visual"><div class="projet-deco-circle"></div><div class="projet-visual-inner"><div class="icon-big">⚡</div></div></div>
+        <div class="projet-body">
+          <span class="projet-role-badge">Supervision</span>
+          <div class="projet-name">Mise aux normes des installations électriques CAMRAIL</div>
+          <div class="projet-desc">Sécurisation et mise en conformité des installations électriques de la société CAMRAIL. Supervision technique et validation des travaux.</div>
+          <div class="projet-client"><i class="fas fa-train"></i> CAMRAIL – Réseau Ferroviaire Camerounais</div>
+        </div>
+      </div>
+      <div class="projet-card reveal reveal-delay-1">
+        <div class="projet-visual"><div class="projet-deco-circle"></div><div class="projet-visual-inner"><div class="icon-big">🤝</div></div></div>
+        <div class="projet-body">
+          <span class="projet-role-badge">Facilitateur</span>
+          <div class="projet-name">Partenariat SITINFRA × Port Autonome de Douala</div>
+          <div class="projet-desc">Mise en relation d'affaires, signature de contrats et accompagnement technique entre SITINFRA et le Port Autonome de Douala.</div>
+          <div class="projet-client"><i class="fas fa-building"></i> SITINFRA CAMEROUN · Port Autonome de Douala</div>
+        </div>
+      </div>
+      <div class="projet-card reveal reveal-delay-2">
+        <div class="projet-visual"><div class="projet-deco-circle"></div><div class="projet-visual-inner"><div class="icon-big">🌍</div></div></div>
+        <div class="projet-body">
+          <span class="projet-role-badge">Facilitateur</span>
+          <div class="projet-name">Partenariat TONA EXIM × Port Autonome de Douala</div>
+          <div class="projet-desc">Facilitation d'affaires et mise en relation stratégique entre TONA EXIM CAMEROUN et le Port Autonome de Douala pour le développement de partenariats commerciaux.</div>
+          <div class="projet-client"><i class="fas fa-globe-africa"></i> TONA EXIM CAMEROUN · Port Autonome de Douala</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="skills-layout">
+      <div class="reveal-left">
+        <span class="section-label">Maîtrise</span>
+        <div class="section-line"></div>
+        <h2 class="section-title">Niveau de Compétence</h2>
+        <p class="section-desc" style="margin-bottom:2rem;">Des expertises solides construites sur des années de pratique terrain et de gestion de projets.</p>
+        <ul class="skills-list">
+          <li class="skills-list-item"><div class="sli-icon"><i class="fas fa-bolt"></i></div><div><div class="sli-name">Ingénierie Électrique</div><div class="sli-desc">Conception, installation, maintenance – secteurs naval, industriel, tertiaire</div></div></li>
+          <li class="skills-list-item"><div class="sli-icon"><i class="fas fa-project-diagram"></i></div><div><div class="sli-name">Supervision de Projets</div><div class="sli-desc">Coordination d'équipes, planification et contrôle qualité</div></div></li>
+          <li class="skills-list-item"><div class="sli-icon"><i class="fas fa-handshake"></i></div><div><div class="sli-name">Négociation & Partenariats</div><div class="sli-desc">Contrats industriels, mise en réseau et conseil stratégique</div></div></li>
+          <li class="skills-list-item"><div class="sli-icon"><i class="fas fa-solar-panel"></i></div><div><div class="sli-name">Énergie Renouvelable</div><div class="sli-desc">Systèmes solaires photovoltaïques et thermiques</div></div></li>
+          <li class="skills-list-item"><div class="sli-icon"><i class="fas fa-fire"></i></div><div><div class="sli-name">Sécurité Incendie</div><div class="sli-desc">Systèmes d'extinction automatique – normes internationales</div></div></li>
+        </ul>
+      </div>
+      <div class="skills-visual reveal-right">
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Ingénierie Électrique</span><span class="skill-bar-pct">95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Systèmes Navals</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Direction d'entreprise</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Facilitation d'affaires</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Énergie Solaire</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Sécurité Incendie</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Réseaux & Télécoms</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:50px 50px;"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div style="text-align:center; margin-bottom:2rem;" class="reveal">
+      <span class="section-label">Collaboration</span>
+      <div class="section-line" style="margin:0 auto 1rem"></div>
+      <h2 class="section-title">Travaillons Ensemble</h2>
+      <p class="section-desc" style="margin:0 auto; color:rgba(255,255,255,0.6)">Un projet industriel, une mise en relation, un conseil stratégique ? Contactez-moi dès aujourd'hui.</p>
+    </div>
+    <div class="contact-layout">
+      <div class="reveal-left">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--white); margin-bottom:0.5rem;">Informations de Contact</h3>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.9rem; line-height:1.7; margin-bottom:1rem;">Disponible pour des collaborations, consultations et facilitation de partenariats stratégiques.</p>
+        <ul class="contact-info-list">
+          <li class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <div class="contact-info-label">Adresse</div>
+              <div class="contact-info-value">Logpom, Avenue Basson – Hôpital des Sœurs<br>B.P. 15 347, Douala, Cameroun</div>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="contact-info-label">Téléphone</div>
+              <div class="contact-info-value">
+                <a href="tel:+237693502389">(+237) 693 502 389</a><br>
+                <a href="tel:+237678829080">(+237) 678 829 080</a>
+              </div>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">
+                <a href="mailto:martinmvondo@gmail.com">martinmvondo@gmail.com</a><br>
+                <a href="mailto:grpeiet2026@gmail.com">grpeiet2026@gmail.com</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="social-links">
+          <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/23778829080" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:martinmvondo@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="tel:+237693502389" class="social-link" title="Appel"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+
+      <!-- ═══ FORMULAIRE → WHATSAPP ═══ -->
+      <div class="contact-form reveal-right">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--white); margin-bottom:1.5rem;">Envoyer un Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom complet *</label>
+            <input type="text" id="f-name" placeholder="Votre nom">
+            <span class="f-error" id="err-name">Ce champ est requis</span>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="f-email" placeholder="votre@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Sujet *</label>
+          <input type="text" id="f-subject" placeholder="Objet de votre message">
+          <span class="f-error" id="err-subject">Ce champ est requis</span>
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea rows="5" id="f-message" placeholder="Décrivez votre projet ou besoin..."></textarea>
+          <span class="f-error" id="err-message">Ce champ est requis</span>
+        </div>
+        <button class="btn-send" id="btn-send" onclick="sendViaWhatsApp()">
+          <i class="fab fa-whatsapp" style="margin-right:8px"></i>Envoyer via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GHE<span>.</span> Martin Paul Ella Mvondo</div>
+  <p class="footer-slogan">"L'innovation au service de l'ingénierie"</p>
+  <p class="footer-text">© 2026 Group Horizon Engineering Sarl — Douala, Cameroun — Tous droits réservés</p>
+</footer>
+
+<!-- Bouton retour en haut — bas DROITE -->
+<a href="#hero" id="back-top"><i class="fas fa-arrow-up"></i></a>
+
+<!-- Bouton WhatsApp flottant — bas GAUCHE -->
+<a href="https://wa.me/23778829080?text=Bonjour%20M.%20Ella%20Mvondo%2C%20j%27ai%20visit%C3%A9%20votre%20portfolio%20et%20je%20souhaite%20vous%20contacter%20pour%20une%20collaboration."
+   id="whatsapp-btn" target="_blank" rel="noopener" title="Discuter sur WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// ── CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX - 6 + 'px';
+  cursor.style.top = e.clientY - 6 + 'px';
+  ring.style.left = e.clientX - 18 + 'px';
+  ring.style.top = e.clientY - 18 + 'px';
+});
+document.querySelectorAll('a, button, .comp-card, .service-card, .projet-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; });
+});
+
+// ── NAVBAR SCROLL
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+});
+
+// ── MOBILE MENU
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.add('open');
+});
+document.getElementById('closeMenu').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.remove('open');
+});
+document.querySelectorAll('.mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+});
+
+// ── REVEAL ON SCROLL
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── SKILL BARS
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skills-visual').forEach(el => barObserver.observe(el));
+
+// ── FORMULAIRE → WHATSAPP
+function sendViaWhatsApp() {
+  const name    = document.getElementById('f-name');
+  const subject = document.getElementById('f-subject');
+  const message = document.getElementById('f-message');
+  const email   = document.getElementById('f-email');
+  let valid = true;
+
+  // Reset
+  [name, subject, message].forEach(el => el.classList.remove('invalid'));
+  document.querySelectorAll('.f-error').forEach(el => el.classList.remove('show'));
+
+  // Validation
+  if (!name.value.trim())    { name.classList.add('invalid');    document.getElementById('err-name').classList.add('show');    valid = false; }
+  if (!subject.value.trim()) { subject.classList.add('invalid'); document.getElementById('err-subject').classList.add('show'); valid = false; }
+  if (!message.value.trim()) { message.classList.add('invalid'); document.getElementById('err-message').classList.add('show'); valid = false; }
+
+  if (!valid) return;
+
+  // Message formaté
+  const emailLine = email.value.trim() ? '\nEmail : ' + email.value.trim() : '';
+  const text =
+    'Bonjour M. Ella Mvondo,\n\n' +
+    "Je m'appelle *" + name.value.trim() + '*.' + emailLine + '\n\n' +
+    '*Sujet :* ' + subject.value.trim() + '\n\n' +
+    '*Message :*\n' + message.value.trim() + '\n\nCordialement.';
+
+  window.open('https://wa.me/23778829080?text=' + encodeURIComponent(text), '_blank');
+
+  // Feedback
+  const btn = document.getElementById('btn-send');
+  btn.innerHTML = '<i class="fas fa-check"></i> Ouverture de WhatsApp...';
+  btn.style.background = '#22c55e';
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fab fa-whatsapp" style="margin-right:8px"></i>Envoyer via WhatsApp';
+    btn.style.background = '';
+  }, 3000);
+}
+
+// ── SMOOTH NAV
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
