@@ -1,0 +1,808 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --bg:#F5F0EA;
+  --surface:#FFFFFF;
+  --surface2:#F9F5F0;
+  --surface3:#EFE9E0;
+  --primary:#2D6A4F;
+  --primary-light:#40916C;
+  --primary-pale:#D8F3DC;
+  --accent:#F4A261;
+  --accent-dark:#E76F51;
+  --accent-pale:#FFF0E6;
+  --gold:#F4C430;
+  --text1:#1A2E1F;
+  --text2:#4A6352;
+  --text3:#8A9E90;
+  --border:#E0D8CE;
+  --shadow:0 4px 24px rgba(45,106,79,0.10);
+  --shadow-lg:0 8px 40px rgba(45,106,79,0.16);
+  --r:16px;
+  --r-sm:10px;
+  --r-xs:8px;
+}
+
+body{
+  background:var(--bg);
+  font-family:'Space Grotesk',sans-serif;
+  color:var(--text1);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* PHONE FRAME */
+.phone-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:24px 12px 32px;
+}
+.phone{
+  width:390px;
+  max-width:100%;
+  background:var(--bg);
+  border-radius:44px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.22),0 2px 8px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.6);
+  overflow:hidden;
+  position:relative;
+  border:8px solid #1A2E1F;
+}
+
+/* STATUS BAR */
+.status-bar{
+  background:var(--surface);
+  padding:12px 24px 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  font-weight:600;
+  color:var(--text1);
+}
+.status-icons{display:flex;gap:6px;align-items:center;}
+.battery{width:22px;height:11px;border:1.5px solid var(--text2);border-radius:2px;position:relative;display:flex;align-items:center;padding:1.5px;}
+.battery::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:2px;height:5px;background:var(--text2);border-radius:0 1px 1px 0;}
+.battery-fill{height:100%;width:75%;background:var(--primary);border-radius:1px;}
+
+/* SCROLL AREA */
+.scroll-area{
+  height:760px;
+  overflow-y:auto;
+  scrollbar-width:none;
+  background:var(--bg);
+}
+.scroll-area::-webkit-scrollbar{display:none;}
+
+/* TOP NAV */
+.top-nav{
+  background:var(--surface);
+  padding:16px 20px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:10;
+}
+.logo-row{display:flex;align-items:center;gap:8px;}
+.logo-mark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:#fff;
+  letter-spacing:-0.5px;
+  box-shadow:0 3px 10px rgba(45,106,79,0.3);
+}
+.app-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:var(--primary);}
+.nav-badges{display:flex;gap:8px;align-items:center;}
+.badge{
+  display:flex;align-items:center;gap:4px;
+  padding:5px 10px;border-radius:20px;
+  font-size:12px;font-weight:700;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  color:var(--text1);
+}
+.badge.flame{background:var(--accent-pale);border-color:#FDDCBC;color:var(--accent-dark);}
+.badge.xp{background:var(--primary-pale);border-color:#B7E4C7;color:var(--primary);}
+.badge-icon{font-size:13px;}
+
+/* LANG BANNER */
+.lang-banner{
+  margin:14px 16px 0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:10px 14px;
+  display:flex;align-items:center;gap:8px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.lang-banner:hover{background:var(--primary-pale);border-color:var(--primary-light);}
+.lang-flag{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#009A44,#CE1126);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;flex-shrink:0;}
+.lang-name{font-size:13px;font-weight:600;color:var(--primary);flex:1;}
+.lang-changer{font-size:11px;color:var(--text3);}
+.chevron{font-size:10px;color:var(--text3);}
+
+/* SECTION */
+.section{padding:16px 16px 0;}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:var(--text1);}
+.see-all{font-size:12px;font-weight:600;color:var(--primary-light);cursor:pointer;text-decoration:none;}
+
+/* DASHBOARD CARD */
+.dash-card{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);
+  border-radius:22px;
+  padding:22px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.dash-card::before{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+}
+.dash-card::after{
+  content:'';position:absolute;bottom:-20px;left:60px;
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(255,255,255,0.06);
+}
+.dash-label{font-size:10px;font-weight:700;letter-spacing:1.2px;opacity:0.7;text-transform:uppercase;}
+.dash-title{font-family:'Nunito',sans-serif;font-size:22px;font-weight:800;line-height:1.2;margin:6px 0 16px;}
+.goal-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.goal-label{font-size:11px;font-weight:600;opacity:0.75;text-transform:uppercase;letter-spacing:0.8px;}
+.goal-value{font-size:13px;font-weight:700;}
+.progress-track{
+  height:10px;background:rgba(255,255,255,0.2);border-radius:10px;overflow:hidden;margin-bottom:18px;
+}
+.progress-fill{
+  height:100%;background:var(--gold);border-radius:10px;
+  width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px rgba(244,196,48,0.5);
+}
+.continue-btn{
+  background:rgba(255,255,255,0.15);
+  border:1.5px solid rgba(255,255,255,0.35);
+  border-radius:12px;
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;
+  transition:all 0.2s;
+  backdrop-filter:blur(4px);
+}
+.continue-btn:hover{background:rgba(255,255,255,0.25);}
+.continue-label{font-size:13px;font-weight:700;color:#fff;}
+.continue-arrow{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--text1);font-weight:700;
+}
+
+/* THEMES GRID */
+.themes-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.theme-card{
+  background:var(--surface);
+  border-radius:var(--r);
+  padding:14px;
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:all 0.22s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.theme-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+  border-color:var(--primary-light);
+}
+.theme-card.locked{opacity:0.45;cursor:default;}
+.theme-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  border-radius:var(--r);
+  background:var(--primary-pale);
+  opacity:0;
+  transition:opacity 0.2s;
+}
+.theme-card:hover:not(.locked)::before{opacity:0.3;}
+.theme-icon-wrap{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--primary-pale);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:8px;
+  border:1px solid #B7E4C7;
+}
+.theme-icon-wrap.accent{background:var(--accent-pale);border-color:#FDDCBC;}
+.theme-icon-wrap.gold{background:#FFF8DC;border-color:#F9E07A;}
+.theme-icon-wrap.blue{background:#EAF4FB;border-color:#B0D9F3;}
+.theme-pct-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px;}
+.theme-name{font-size:13px;font-weight:700;color:var(--text1);line-height:1.3;}
+.theme-lessons{font-size:11px;color:var(--text3);margin-top:2px;}
+.theme-pct{font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--primary-pale);color:var(--primary);}
+.theme-pct.zero{background:var(--surface3);color:var(--text3);}
+.lock-badge{position:absolute;top:10px;right:10px;font-size:14px;}
+
+/* EXERCISES SECTION */
+.exercises-list{display:flex;flex-direction:column;gap:8px;}
+.exo-card{
+  background:var(--surface);
+  border-radius:var(--r-sm);
+  padding:12px 14px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;
+  transition:all 0.18s;
+}
+.exo-card:hover{background:var(--surface2);transform:translateX(3px);}
+.exo-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.exo-info{flex:1;}
+.exo-name{font-size:13px;font-weight:700;color:var(--text1);}
+.exo-meta{font-size:11px;color:var(--text3);margin-top:2px;}
+.exo-badge{
+  padding:3px 8px;border-radius:20px;
+  font-size:10px;font-weight:700;letter-spacing:0.5px;
+  text-transform:uppercase;
+}
+.exo-badge.new{background:var(--accent-pale);color:var(--accent-dark);}
+.exo-badge.done{background:var(--primary-pale);color:var(--primary);}
+.exo-badge.locked{background:var(--surface3);color:var(--text3);}
+.exo-arrow{font-size:14px;color:var(--text3);}
+
+/* CULTURAL CARD */
+.cultural-card{
+  background:linear-gradient(135deg,#2D3A2E 0%,#1A2E1F 100%);
+  border-radius:22px;
+  padding:20px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.cultural-card::before{
+  content:'"';position:absolute;top:-8px;left:16px;
+  font-size:120px;font-family:'Nunito',sans-serif;font-weight:900;
+  opacity:0.06;color:#fff;line-height:1;
+}
+.cultural-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px;padding:4px 10px;margin-bottom:10px;
+}
+.cultural-badge-text{font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;opacity:0.8;}
+.cultural-text{font-size:13px;line-height:1.6;opacity:0.9;}
+.cultural-footer{margin-top:12px;display:flex;align-items:center;gap:8px;}
+.cultural-dots{display:flex;gap:4px;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);}
+.dot.active{background:var(--gold);width:16px;border-radius:3px;}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:8px 0 16px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  position:sticky;bottom:0;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  cursor:pointer;padding:4px 10px;border-radius:12px;
+  transition:all 0.2s;
+  flex:1;
+}
+.nav-item:hover{background:var(--surface2);}
+.nav-item.active .nav-icon{color:var(--primary);}
+.nav-item.active .nav-dot{background:var(--primary);}
+.nav-icon{font-size:20px;color:var(--text3);transition:color 0.2s;}
+.nav-label{font-size:9px;font-weight:700;color:var(--text3);letter-spacing:0.5px;}
+.nav-item.active .nav-label{color:var(--primary);}
+.nav-dot{width:4px;height:4px;border-radius:50%;background:transparent;transition:background 0.2s;}
+
+/* DRAWER */
+.drawer-overlay{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.4);
+  z-index:50;
+  opacity:0;transition:opacity 0.3s;
+  pointer-events:none;
+  border-radius:36px;
+}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+.drawer{
+  position:absolute;top:0;bottom:0;right:0;
+  width:82%;
+  background:var(--surface);
+  z-index:60;
+  transform:translateX(100%);
+  transition:transform 0.35s cubic-bezier(.4,0,.2,1);
+  padding:0;
+  display:flex;flex-direction:column;
+  border-radius:0 36px 36px 0;
+  overflow:hidden;
+}
+.drawer.open{transform:translateX(0);}
+.drawer-header{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);
+  padding:48px 20px 20px;
+  position:relative;
+}
+.drawer-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.15);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:#fff;
+}
+.drawer-avatar-ring{
+  width:60px;height:60px;border-radius:50%;
+  border:2.5px solid rgba(255,255,255,0.5);
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.15);
+  font-size:26px;margin-bottom:10px;
+}
+.drawer-name{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:#fff;}
+.drawer-level{font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-top:2px;letter-spacing:0.5px;}
+.streak-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(244,196,48,0.2);border:1px solid rgba(244,196,48,0.4);
+  border-radius:20px;padding:5px 12px;margin-top:10px;
+}
+.streak-text{font-size:12px;font-weight:700;color:var(--gold);}
+.drawer-menu{flex:1;overflow-y:auto;padding:16px 0;}
+.drawer-section-label{
+  font-size:10px;font-weight:700;letter-spacing:1.2px;
+  color:var(--text3);padding:8px 20px 4px;text-transform:uppercase;
+}
+.drawer-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 20px;cursor:pointer;
+  transition:background 0.15s;
+}
+.drawer-item:hover{background:var(--surface2);}
+.drawer-item.highlight{
+  margin:4px 12px;border-radius:12px;
+  background:var(--primary);color:#fff;
+}
+.drawer-item.highlight:hover{background:var(--primary-light);}
+.drawer-item-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--surface3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.drawer-item.highlight .drawer-item-icon{background:rgba(255,255,255,0.15);}
+.drawer-item-label{font-size:14px;font-weight:600;color:var(--text1);}
+.drawer-item.highlight .drawer-item-label{color:#fff;}
+.drawer-footer{padding:12px 20px 20px;border-top:1px solid var(--border);}
+.logout-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:12px;
+  border:1px solid var(--border);background:var(--surface2);cursor:pointer;
+  transition:all 0.2s;font-size:13px;font-weight:600;color:var(--accent-dark);
+}
+.logout-btn:hover{background:var(--accent-pale);border-color:#FDDCBC;}
+
+/* LESSON MODAL */
+.modal-overlay{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.5);
+  z-index:70;
+  opacity:0;transition:opacity 0.25s;
+  pointer-events:none;
+  border-radius:36px;
+  display:flex;align-items:flex-end;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-sheet{
+  background:var(--surface);
+  border-radius:24px 24px 0 0;
+  padding:20px;
+  width:100%;
+  transform:translateY(100%);
+  transition:transform 0.35s cubic-bezier(.4,0,.2,1);
+}
+.modal-overlay.open .modal-sheet{transform:translateY(0);}
+.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--border);margin:0 auto 18px;}
+.modal-title{font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.lesson-list{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;}
+.lesson-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:10px;
+  background:var(--surface2);border:1px solid var(--border);
+  cursor:pointer;transition:all 0.18s;
+}
+.lesson-row:hover{background:var(--primary-pale);border-color:var(--primary-light);}
+.lesson-num{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--primary);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;
+}
+.lesson-num.done{background:var(--primary-light);}
+.lesson-num.locked{background:var(--surface3);color:var(--text3);}
+.lesson-info{flex:1;}
+.lesson-name{font-size:13px;font-weight:600;color:var(--text1);}
+.lesson-desc{font-size:11px;color:var(--text3);}
+.lesson-go{font-size:14px;color:var(--primary-light);}
+.modal-close-btn{
+  width:100%;margin-top:14px;padding:12px;border-radius:12px;
+  border:1.5px solid var(--border);background:transparent;
+  font-size:14px;font-weight:600;color:var(--text2);cursor:pointer;
+}
+
+/* ANIMATIONS */
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+
+.anim-1{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) both;}
+.anim-2{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) 0.1s both;}
+.anim-3{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) 0.2s both;}
+.anim-4{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) 0.3s both;}
+.anim-5{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) 0.4s both;}
+.anim-6{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) 0.5s both;}
+
+.theme-card{animation:slideUp 0.5s cubic-bezier(.4,0,.2,1) both;}
+.theme-card:nth-child(1){animation-delay:0.25s;}
+.theme-card:nth-child(2){animation-delay:0.3s;}
+.theme-card:nth-child(3){animation-delay:0.35s;}
+.theme-card:nth-child(4){animation-delay:0.4s;}
+
+/* ACTIVE TAB */
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* RIPPLE */
+@keyframes ripple{from{transform:scale(0);opacity:0.4;}to{transform:scale(2.5);opacity:0;}}
+.ripple-effect{
+  position:absolute;border-radius:50%;
+  background:rgba(45,106,79,0.2);
+  animation:ripple 0.5s ease-out forwards;
+  pointer-events:none;
+}
+</style>
+
+<div class="phone-wrap">
+<div class="phone">
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="status-icons">
+      <span>●●●</span>
+      <span>WiFi</span>
+      <div class="battery"><div class="battery-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- TOP NAV -->
+  <div class="top-nav anim-1">
+    <div class="logo-row">
+      <div class="logo-mark">M</div>
+      <span class="app-name">Mulema</span>
+    </div>
+    <div class="nav-badges">
+      <div class="badge flame"><span class="badge-icon">🔥</span><span>7</span></div>
+      <div class="badge xp"><span class="badge-icon">⚡</span><span>340 XP</span></div>
+      <div class="badge" id="menu-btn" onclick="openDrawer()" style="cursor:pointer;padding:5px 8px;">☰</div>
+    </div>
+  </div>
+
+  <!-- SCROLL AREA -->
+  <div class="scroll-area">
+
+    <!-- LANG BANNER -->
+    <div class="lang-banner anim-2">
+      <div class="lang-flag">CM</div>
+      <span class="lang-name">Bamileke · Ghomálá'</span>
+      <span class="lang-changer">Changer</span>
+      <span class="chevron">›</span>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="section anim-2" style="margin-top:14px;">
+      <div class="dash-card">
+        <div class="dash-label">Tableau de bord</div>
+        <div class="dash-title">Ta progression<br>aujourd'hui ✨</div>
+        <div class="goal-row">
+          <span class="goal-label">Objectif quotidien</span>
+          <span class="goal-value">12 / 40 min</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+        <div class="continue-btn" onclick="openLessons('Salutation')">
+          <span class="continue-label">▶  Continuer l'apprentissage</span>
+          <div class="continue-arrow">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEMES -->
+    <div class="section anim-3" style="margin-top:20px;">
+      <div class="section-head">
+        <span class="section-title">🗂 Thèmes à explorer</span>
+        <a class="see-all" onclick="sendPrompt('Voir tous les thèmes disponibles dans Mulema')">Voir tout ›</a>
+      </div>
+      <div class="themes-grid">
+        <div class="theme-card" onclick="openLessons('Salutation')">
+          <div class="theme-icon-wrap">👋</div>
+          <div class="theme-name">Salutation</div>
+          <div class="theme-lessons">06 leçons</div>
+          <div class="theme-pct-row">
+            <span class="theme-pct">65%</span>
+          </div>
+        </div>
+        <div class="theme-card" onclick="openLessons('Famille')">
+          <div class="theme-icon-wrap accent">👨‍👩‍👧</div>
+          <div class="theme-name">Famille</div>
+          <div class="theme-lessons">08 leçons</div>
+          <div class="theme-pct-row">
+            <span class="theme-pct">30%</span>
+          </div>
+        </div>
+        <div class="theme-card" onclick="openLessons('Nourriture')">
+          <div class="theme-icon-wrap gold">🍽</div>
+          <div class="theme-name">Nourriture</div>
+          <div class="theme-lessons">05 leçons</div>
+          <div class="theme-pct-row">
+            <span class="theme-pct zero">0%</span>
+          </div>
+        </div>
+        <div class="theme-card locked">
+          <div class="theme-icon-wrap blue">✈️</div>
+          <div class="theme-name">Voyage</div>
+          <div class="theme-lessons">07 leçons</div>
+          <div class="theme-pct-row">
+            <span class="theme-pct zero">0%</span>
+          </div>
+          <div class="lock-badge">🔒</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXERCISES -->
+    <div class="section anim-4" style="margin-top:20px;">
+      <div class="section-head">
+        <span class="section-title">💪 Exercices du jour</span>
+        <a class="see-all" onclick="sendPrompt('Voir tous les exercices disponibles dans Mulema')">Voir tout ›</a>
+      </div>
+      <div class="exercises-list">
+        <div class="exo-card" onclick="goExo('famille','exos1')">
+          <div class="exo-icon" style="background:#EAF4FB;">🔤</div>
+          <div class="exo-info">
+            <div class="exo-name">Vocabulaire · Famille</div>
+            <div class="exo-meta">15 questions · ~8 min</div>
+          </div>
+          <span class="exo-badge new">Nouveau</span>
+          <span class="exo-arrow">›</span>
+        </div>
+        <div class="exo-card" onclick="goExo('salutation','exos1')">
+          <div class="exo-icon" style="background:#EAF3DE;">🗣</div>
+          <div class="exo-info">
+            <div class="exo-name">Prononciation · Salutation</div>
+            <div class="exo-meta">10 exercices · ~5 min</div>
+          </div>
+          <span class="exo-badge done">✓ Fait</span>
+          <span class="exo-arrow">›</span>
+        </div>
+        <div class="exo-card" style="opacity:0.5;cursor:default;">
+          <div class="exo-icon" style="background:var(--surface3);">🧩</div>
+          <div class="exo-info">
+            <div class="exo-name">Quiz · Nourriture</div>
+            <div class="exo-meta">Débloquer à 50% Famille</div>
+          </div>
+          <span class="exo-badge locked">🔒</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CULTURAL CARD -->
+    <div class="section anim-5" style="margin-top:20px;margin-bottom:16px;">
+      <div class="cultural-card">
+        <div class="cultural-badge">
+          <span>🌿</span>
+          <span class="cultural-badge-text">Fait culturel</span>
+        </div>
+        <div class="cultural-text">
+          Le mot <strong style="color:var(--gold)">"Mulema"</strong> signifie <em>"Cœur"</em> en Ghomálá' et dans plusieurs langues bantoues d'Afrique centrale. Apprendre une langue, c'est toucher l'âme d'un peuple.
+        </div>
+        <div class="cultural-footer">
+          <div class="cultural-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:20px;"></div>
+  </div><!-- end scroll -->
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav anim-6">
+    <div class="nav-item active" onclick="setTab(this,'home')">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Accueil</span>
+      <div class="nav-dot"></div>
+    </div>
+    <div class="nav-item" onclick="setTab(this,'lessons')">
+      <span class="nav-icon">📚</span>
+      <span class="nav-label">Leçons</span>
+      <div class="nav-dot"></div>
+    </div>
+    <div class="nav-item" onclick="setTab(this,'exercises')">
+      <span class="nav-icon">💪</span>
+      <span class="nav-label">Exercices</span>
+      <div class="nav-dot"></div>
+    </div>
+    <div class="nav-item" onclick="setTab(this,'profile')">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Profil</span>
+      <div class="nav-dot"></div>
+    </div>
+  </div>
+
+  <!-- DRAWER OVERLAY -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+  <!-- DRAWER PANEL -->
+  <div class="drawer" id="drawerPanel">
+    <div class="drawer-header">
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+      <div class="drawer-avatar-ring">👤</div>
+      <div class="drawer-name">Amina Ngoufo</div>
+      <div class="drawer-level">SCHOLAR LEVEL 3 · 340 XP</div>
+      <div class="streak-pill"><span>🔥</span><span class="streak-text">7 jours de suite !</span></div>
+    </div>
+    <div class="drawer-menu">
+      <div class="drawer-section-label">Menu rapide</div>
+      <div class="drawer-item" onclick="sendPrompt('Ouvrir les quêtes du jour dans Mulema');closeDrawer()">
+        <div class="drawer-item-icon">🏆</div>
+        <span class="drawer-item-label">Quêtes du jour</span>
+        <span style="margin-left:auto;font-size:12px;color:var(--text3);">3 actives</span>
+      </div>
+      <div class="drawer-item" onclick="sendPrompt('Voir les notifications Mulema');closeDrawer()">
+        <div class="drawer-item-icon">🔔</div>
+        <span class="drawer-item-label">Notifications</span>
+        <span style="margin-left:auto;background:#E76F51;color:#fff;border-radius:20px;padding:1px 7px;font-size:11px;font-weight:700;">2</span>
+      </div>
+      <div class="drawer-item" onclick="sendPrompt('Changer de langue dans Mulema');closeDrawer()">
+        <div class="drawer-item-icon">🌍</div>
+        <span class="drawer-item-label">Changer de langue</span>
+      </div>
+      <div class="drawer-item highlight" onclick="sendPrompt('Ouvrir les paramètres Mulema');closeDrawer()">
+        <div class="drawer-item-icon">⚙️</div>
+        <span class="drawer-item-label">Paramètres</span>
+      </div>
+      <div class="drawer-section-label" style="margin-top:8px;">Progression</div>
+      <div class="drawer-item" onclick="sendPrompt('Voir mon classement dans Mulema');closeDrawer()">
+        <div class="drawer-item-icon">🥇</div>
+        <span class="drawer-item-label">Classement</span>
+      </div>
+      <div class="drawer-item" onclick="sendPrompt('Voir mes badges et succès Mulema');closeDrawer()">
+        <div class="drawer-item-icon">🎖</div>
+        <span class="drawer-item-label">Mes badges</span>
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <div class="logout-btn" onclick="sendPrompt('Déconnexion de Mulema confirmée')">
+        <span>🚪</span><span>Déconnexion</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON MODAL (bottom sheet) -->
+  <div class="modal-overlay" id="lessonModal">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-title" id="modalTitle">Thème : Salutation</div>
+      <div class="modal-sub" id="modalSub">Choisissez une leçon pour commencer</div>
+      <div class="lesson-list" id="lessonList"></div>
+      <button class="modal-close-btn" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+
+</div><!-- .phone -->
+</div><!-- .phone-wrap -->
+
+<script>
+const lessons = {
+  'Salutation':[
+    {num:1,name:'Premiers mots',desc:'Bonjour, Bonsoir, Merci',done:true},
+    {num:2,name:'Se présenter',desc:'Mon nom, mon origine',done:true},
+    {num:3,name:'Expressions courantes',desc:'Comment ça va, très bien',done:false},
+    {num:4,name:'Prises de congé',desc:'Au revoir, À bientôt',done:false},
+    {num:5,name:'Politesse avancée',desc:'Formules de respect',locked:true},
+    {num:6,name:'Dialogue complet',desc:'Conversation naturelle',locked:true},
+  ],
+  'Famille':[
+    {num:1,name:'Membres de la famille',desc:'Père, mère, frère, sœur',done:true},
+    {num:2,name:'Relations étendues',desc:'Oncle, tante, cousin',done:false},
+    {num:3,name:'Décrire sa famille',desc:'Adjectifs et possessifs',done:false},
+    {num:4,name:'Dialogues familiaux',desc:'Conversations du quotidien',locked:true},
+  ],
+  'Nourriture':[
+    {num:1,name:'Aliments de base',desc:'Tubercules, légumes, viandes',done:false},
+    {num:2,name:'Plats traditionnels',desc:'Ndolé, eru, okok',done:false},
+    {num:3,name:'Au marché',desc:'Acheter, négocier, goûter',locked:true},
+  ],
+};
+
+function openLessons(theme){
+  const data = lessons[theme] || [];
+  document.getElementById('modalTitle').textContent = 'Thème : ' + theme;
+  document.getElementById('modalSub').textContent = data.length + ' leçons disponibles';
+  const list = document.getElementById('lessonList');
+  list.innerHTML = data.map(l=>`
+    <div class="lesson-row" onclick="${l.locked ? '' : `goLesson('${theme.toLowerCase()}',${l.num})`}" style="${l.locked?'opacity:0.4;cursor:default;':''}">
+      <div class="lesson-num ${l.done?'done':l.locked?'locked':''}">${l.done?'✓':l.num}</div>
+      <div class="lesson-info">
+        <div class="lesson-name">${l.name}</div>
+        <div class="lesson-desc">${l.desc}</div>
+      </div>
+      <span class="lesson-go">${l.locked?'🔒':'›'}</span>
+    </div>
+  `).join('');
+  document.getElementById('lessonModal').classList.add('open');
+}
+
+function goLesson(theme, num){
+  sendPrompt(`Navigation vers lessons/${num}.jsx (thème: ${theme})`);
+  closeModal();
+}
+function goExo(theme, exo){
+  sendPrompt(`Navigation vers exercices/${theme}/${exo}.jsx`);
+}
+
+function closeModal(){
+  document.getElementById('lessonModal').classList.remove('open');
+}
+
+function openDrawer(){
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.getElementById('drawerPanel').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.getElementById('drawerPanel').classList.remove('open');
+}
+
+function setTab(el, tab){
+  document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  if(tab==='lessons') openLessons('Salutation');
+  else if(tab==='exercises') goExo('famille','exos1');
+  else if(tab==='profile') sendPrompt('Ouvrir le profil utilisateur Mulema');
+}
+
+// Animate progress bar
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('progressBar').style.width = '30%';
+  }, 600);
+});
+
+// Close modal clicking overlay
+document.getElementById('lessonModal').addEventListener('click', function(e){
+  if(e.target === this) closeModal();
+});
+</script>
